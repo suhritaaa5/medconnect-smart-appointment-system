@@ -121,6 +121,10 @@ const appointmentCancel = async (req, res) => {
       return res.json({ success: false, message: "Already cancelled" })
     }
 
+    if(appointmentData.payment){
+        return res.json({success:false,message:'Paid appointment cannot be cancelled'})
+    }
+
     // 1) mark appointment cancelled
     await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true })
 
