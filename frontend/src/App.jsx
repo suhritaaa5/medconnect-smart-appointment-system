@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
-import Home from './pages/home'
+import Home from './pages/Home'
 import Doctor from './pages/Doctor'
 import Login from './pages/Login'
 import About from './pages/About'
