@@ -6,6 +6,10 @@ import { AppContext } from '../../context/AppContext'
 const Dashboard = () => {
   const { aToken, getDashData, dashData, cancelAppointment } = useContext(AdminContext)
   const { slotDateFormat } = useContext(AppContext)
+  const handleCancel = async (id) => {
+  await cancelAppointment(id)
+  await getDashData()
+}
 
   useEffect(() => {
     if (aToken) {
@@ -75,7 +79,7 @@ const Dashboard = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => cancelAppointment(item._id)}
+                    onClick={() => handleCancel(item._id)}
                     className="w-20 px-3 py-1 text-sm rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                   >
                     X

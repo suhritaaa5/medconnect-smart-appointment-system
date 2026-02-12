@@ -93,7 +93,27 @@ const MyAppointments = () => {
 
   useEffect(() => {
     if (!token) return
+
+    // initial load
     getUserAppointments()
+
+    const handleFocus = () => {
+      getUserAppointments()
+    }
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        getUserAppointments()
+      }
+    }
+
+    window.addEventListener("focus", handleFocus)
+    document.addEventListener("visibilitychange", handleVisibility)
+
+    return () => {
+      window.removeEventListener("focus", handleFocus)
+      document.removeEventListener("visibilitychange", handleVisibility)
+    }
   }, [token])
 
 

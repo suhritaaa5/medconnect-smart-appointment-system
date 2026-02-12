@@ -50,25 +50,25 @@ const AllAppointments = () => {
               {item.payment ? "Paid" : "Pending"}
             </p>
             {item.cancelled ? (
-  <button className="w-20 px-3 py-1 text-sm rounded border border-red-400 text-red-600">
-    Cancelled
-  </button>
-) : item.isCompleted ? (
-  <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
-    Completed
-  </button>
-) : item.payment ? (
-  <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
-    Paid
-  </button>
-) : (
-  <button
-    onClick={() => cancelAppointment(item._id)}
-    className="w-20 px-3 py-1 text-sm rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-  >
-    X
-  </button>
-)}
+              <button className="w-20 px-3 py-1 text-sm rounded border border-red-400 text-red-600">
+                Cancelled
+              </button>
+            ) : item.isCompleted ? (
+              <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
+                Completed
+              </button>
+            ) : item.payment ? (
+              <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
+                Paid
+              </button>
+            ) : (
+              <button
+                onClick={() => cancelAppointment(item._id)}
+                className="w-20 px-3 py-1 text-sm rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+              >
+                X
+              </button>
+            )}
 
           </div>
         ))}
