@@ -149,7 +149,7 @@ const MyAppointments = () => {
                 Pay Online
               </button>}
 
-              {!item.cancelled && !item.isCompleted && <button onClick={() => cancelAppointment(item._id)} className="px-4 py-2 text-sm font-medium rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all">
+              {!item.cancelled && !item.isCompleted && item.payment &&<button onClick={() => cancelAppointment(item._id)} className="px-4 py-2 text-sm font-medium rounded-lg border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all">
                 Cancel Appointment
               </button>}
               {item.cancelled && !item.isCompleted && <button className="sm:min-w-28 px-3 py-1 text-sm font-medium rounded text-red-600 border border-red-400 text-center">Appointment Cancelled</button>}
