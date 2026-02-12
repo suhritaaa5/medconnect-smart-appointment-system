@@ -5,7 +5,7 @@ import { AppContext } from '../../context/AppContext'
 
 const Dashboard = () => {
   const { aToken, getDashData, dashData, cancelAppointment } = useContext(AdminContext)
-  const {slotDateFormat}=useContext(AppContext)
+  const { slotDateFormat } = useContext(AppContext)
 
   useEffect(() => {
     if (aToken) {
@@ -61,17 +61,26 @@ const Dashboard = () => {
                   <p className="font-medium text-gray-800">{item.docData.name}</p>
                   <p className="text-sm text-gray-500">{slotDateFormat(item.slotDate)}</p>
                 </div>
-                {item.cancelled
-              ? <button className="w-20 px-3 py-1 text-sm font-medium rounded text-red-600 border border-red-400 text-center">
-                Cancelled
-              </button>
-              : item.isCompleted ? <button className="w-20  py-1 text-sm font-medium rounded text-green-600 border border-green-400 text-center">
-                Completed
-              </button>
-                : <button onClick={() => cancelAppointment(item._id)} className="w-20 px-3 py-1 text-sm font-medium rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all">
-                  X
-                </button>
-            }
+                {item.cancelled ? (
+                  <button className="w-20 px-3 py-1 text-sm rounded border border-red-400 text-red-600">
+                    Cancelled
+                  </button>
+                ) : item.isCompleted ? (
+                  <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
+                    Completed
+                  </button>
+                ) : item.payment ? (
+                  <button className="w-20 py-1 text-sm rounded border border-green-400 text-green-600">
+                    Paid
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => cancelAppointment(item._id)}
+                    className="w-20 px-3 py-1 text-sm rounded border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                  >
+                    X
+                  </button>
+                )}
               </div>
             ))
           }
