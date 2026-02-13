@@ -86,6 +86,23 @@ const updateProfile = async (req, res) => {
         }
         let parsedAddress = address
         if (typeof address === 'string') { parsedAddress = JSON.parse(address) }
+        // DOB validation 
+        const dobDate = new Date(dob)
+        const today = new Date()
+
+        if (Number.isNaN(dobDate.getTime())) {
+            return res.json({ success: false, message: "Invalid DOB format" })
+        }
+
+        if (dobDate > today) {
+            return res.json({ success: false, message: "Invalid DOB" })
+        }
+
+        // Optional realistic limit
+        const age = today.getFullYear() - dobDate.getFullYear()
+        if (age < 0 || age > 120) {
+            return res.json({ success: false, message: "Invalid DOB" })
+        }
         await userModel.findByIdAndUpdate(userId, { name, phone, address: parsedAddress, dob, gender })
         if (imageFile) {
             const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: 'image' })
@@ -169,7 +186,7 @@ const bookAppointment = async (req, res) => {
 const listAppointment = async (req, res) => {
     try {
         const userId = req.userId
-        const appointments = await appointmentModel.find({ userId }).sort({date:-1})
+        const appointments = await appointmentModel.find({ userId }).sort({ date: -1 })
 
         res.json({ success: true, appointments })
     } catch (error) {

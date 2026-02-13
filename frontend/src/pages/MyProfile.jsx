@@ -137,7 +137,10 @@ const MyProfile = () => {
                 ? <input
                   type="date"
                   value={userData.dob}
-                  onChange={e => setUserData(prev => ({ ...prev, dob: e.target.value }))}
+                  max={new Date().toISOString().split("T")[0]}
+                  onChange={e =>
+                    setUserData(prev => ({ ...prev, dob: e.target.value }))
+                  }
                   className="border px-3 py-1 rounded"
                 />
                 : <p>{userData.dob}</p>
